@@ -1,5 +1,7 @@
 package cft.shift.lab.b4lmor.rangemerger.utils;
 
+import cft.shift.lab.b4lmor.rangemerger.exception.WrongKindNameException;
+
 public enum Kind {
     LETTERS,
     DIGITS;
@@ -7,7 +9,7 @@ public enum Kind {
         return switch (kind) {
             case "letters" -> LETTERS;
             case "digits" -> DIGITS;
-            default -> DIGITS; // TODO : throw an exception
+            default -> throw new WrongKindNameException();
         };
     }
 }
