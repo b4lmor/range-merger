@@ -23,6 +23,10 @@ public class IntInterval implements IInterval<Integer> {
         this.intervalStart = start;
         this.intervalEnd = end;
     }
+    public IntInterval(Integer start, Integer end) {
+        this.intervalStart = start;
+        this.intervalEnd = end;
+    }
     public IntInterval() {
     }
 

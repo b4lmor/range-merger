@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IntervalServiceImpl implements IntervalService {
@@ -29,12 +30,11 @@ public class IntervalServiceImpl implements IntervalService {
 
     @Override
     public IntervalDTO<?> getMinInterval(Kind kind) {
-        IntervalDTO<?> minIntervalDTO = null;
         switch (kind) {
             case DIGITS -> {
                 IntInterval interval = intIntervalRepository.findMinInterval()
                         .orElseThrow(MinIntervalNotFoundException::new);
-                minIntervalDTO = new IntervalDTO<>(
+                return new IntervalDTO<>(
                         interval.getIntervalStart(),
                         interval.getIntervalEnd()
                 );
@@ -42,45 +42,41 @@ public class IntervalServiceImpl implements IntervalService {
             case LETTERS -> {
                 StrInterval interval = strIntervalRepository.findMinInterval()
                         .orElseThrow(MinIntervalNotFoundException::new);
-                minIntervalDTO = new IntervalDTO<>(
+                return new IntervalDTO<>(
                         interval.getIntervalStart(),
                         interval.getIntervalEnd()
                 );
             }
+            default -> {
+                throw new RuntimeException("undefined behavior");
+            }
         }
-        return minIntervalDTO;
     }
 
     @Override
     public void mergeIntervals(Kind kind, List<IntervalDTO<?>> intervalDTOs) {
         switch (kind) {
             case DIGITS -> {
-                List<IntInterval> intervals = new ArrayList<>();
-                for (IntervalDTO<?> intervalDTO : intervalDTOs) {
-                    IntInterval interval = new IntInterval();
-                    interval.setIntervalStart((Integer) intervalDTO.getStart());
-                    interval.setIntervalEnd((Integer) intervalDTO.getEnd());
-                    intervals.add(interval);
-                }
+                List<IntInterval> intervals = intervalDTOs.stream()
+                        .map(interval -> new IntInterval(
+                                (Integer) interval.getStart(),
+                                (Integer) interval.getEnd()
+                        ))
+                        .collect(Collectors.toList());
                 List<IntInterval> mergedIntervals =
                         IntervalMerger.<Integer, IntInterval>merge(intervals);
-                for (IntInterval interval : mergedIntervals) {
-                    intIntervalRepository.save(interval);
-                }
+                mergedIntervals.forEach(intIntervalRepository::save);
             }
             case LETTERS -> {
-                List<StrInterval> intervals = new ArrayList<>();
-                for (IntervalDTO<?> intervalDTO : intervalDTOs) {
-                    StrInterval interval = new StrInterval();
-                    interval.setIntervalStart((String) intervalDTO.getStart());
-                    interval.setIntervalEnd((String) intervalDTO.getEnd());
-                    intervals.add(interval);
-                }
+                List<StrInterval> intervals = intervalDTOs.stream()
+                        .map(interval -> new StrInterval(
+                                (String) interval.getStart(),
+                                (String) interval.getEnd()
+                        ))
+                        .collect(Collectors.toList());
                 List<StrInterval> mergedIntervals =
                         IntervalMerger.<String, StrInterval>merge(intervals);
-                for (StrInterval interval : mergedIntervals) {
-                    strIntervalRepository.save(interval);
-                }
+                mergedIntervals.forEach(strIntervalRepository::save);
             }
         }
     }

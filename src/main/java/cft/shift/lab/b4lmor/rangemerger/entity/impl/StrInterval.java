@@ -26,6 +26,10 @@ public class StrInterval implements IInterval<String> {
         this.intervalStart = start;
         this.intervalEnd = end;
     }
+    public StrInterval(String start, String end) {
+        this.intervalStart = start;
+        this.intervalEnd = end;
+    }
     public StrInterval() {
     }
 
