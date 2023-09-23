@@ -1,0 +1,10 @@
+springdoc:
+  use-management-port: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, openapi, swagger-ui
+  server:
+    port: 9090
