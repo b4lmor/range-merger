@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "e2b5f184-7d13-4a51-ae8d-d4c999f94e95",
+		"name": "range-merger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20530693"
+	},
+	"item": [
+		{
+			"name": "Get min interval (digits)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/v1/intervals/min?kind=digits",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"min"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "digits"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get min interval (letters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/v1/intervals/min?kind=letters",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"min"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "letters"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merge intervals (digits)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    [1, 4],\r\n    [-100, 100],\r\n    [500, 1000],\r\n    [7, 107],\r\n    [1, 2],\r\n    [3, 4],\r\n    [5, 6]\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/intervals/merge?kind=digits",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"merge"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "digits"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merge intervals (letters)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    [1, 4],\r\n    [-100, 100],\r\n    [500, 1000],\r\n    [7, 107],\r\n    [1, 2],\r\n    [3, 4],\r\n    [5, 6]\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/intervals/merge?kind=digits",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"intervals",
+						"merge"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "digits"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

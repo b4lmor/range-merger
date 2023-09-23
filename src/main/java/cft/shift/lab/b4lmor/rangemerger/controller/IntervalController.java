@@ -63,7 +63,7 @@ public class IntervalController {
             @Parameter(
                     name =  "api.schemas.kind.name",
                     description  = "api.schemas.kind.description",
-                    example = "letters",
+                    example = "digits",
                     required = true)
             @RequestParam(required = true, name = "kind")
             String rawKind,
