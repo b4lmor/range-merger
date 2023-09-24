@@ -4,6 +4,7 @@ import cft.shift.lab.b4lmor.rangemerger.DTO.impl.IntervalDTO;
 import cft.shift.lab.b4lmor.rangemerger.entity.impl.IntInterval;
 import cft.shift.lab.b4lmor.rangemerger.entity.impl.StrInterval;
 import cft.shift.lab.b4lmor.rangemerger.exception.MinIntervalNotFoundException;
+import cft.shift.lab.b4lmor.rangemerger.exception.WrongKindNameException;
 import cft.shift.lab.b4lmor.rangemerger.repository.IntIntervalRepository;
 import cft.shift.lab.b4lmor.rangemerger.repository.StrIntervalRepository;
 import cft.shift.lab.b4lmor.rangemerger.service.IntervalService;
@@ -48,7 +49,7 @@ public class IntervalServiceImpl implements IntervalService {
                 );
             }
             default -> {
-                throw new RuntimeException("undefined behavior");
+                throw new WrongKindNameException();
             }
         }
     }
